@@ -1,0 +1,213 @@
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="description" content="show the mindmaps on line." />
+<meta name="keywords" content="mind maps html5 mindmaps freemind onlinemind" />
+<meta name="google" content="notranslate"/>
+<title>mindmaps</title>
+<link rel="icon" type="image/png" href="img/favicon.png" />
+<link rel="stylesheet" href="/static/css2/common.css">
+<link rel="stylesheet" href="/static/css2/app.css">
+<link rel="stylesheet" href="/static/css2/Aristo/jquery-ui-1.8.7.custom.css" />
+<link rel="stylesheet" href="/static/css2/minicolors/jquery.miniColors.css">
+
+<script id="template-float-panel" type="text/x-jquery-tmpl">
+<div class="ui-widget ui-dialog ui-corner-all ui-widget-content float-panel no-select">
+  <div class="ui-dialog-titlebar ui-widget-header ui-helper-clearfix">
+	  <span class="ui-dialog-title">${{s1}}title}</span>
+    <a class="ui-dialog-titlebar-close ui-corner-all" href="#" role="button">
+      <span class="ui-icon"></span>
+    </a>
+  </div>
+  <div class="ui-dialog-content ui-widget-content">
+  </div>
+</div>
+</script>
+
+<script id="template-notification" type="text/x-jquery-tmpl">
+<div class="notification">
+	{{s2}}if closeButton}}
+  <a href="#" class="close-button">x</a>
+  {{s2}}/if}}
+  {{s2}}if title}}
+  <h1 class="title">{{s2}}html title}}</h1>
+  {{s2}}/if}}
+  <div class="content">{{s2}}html content}}</div>
+</div>
+</script>
+
+<script id="template-open-table-item" type="text/x-jquery-tmpl">
+<tr>
+	<td><a class="title" href="#">${{s1}}title}</a></td>
+	<td>${{s1}}$item.format(dates.modified)}</td>
+  <td><a class="delete" href="#">delete</a></td>
+</tr>
+</script>
+
+<script id="template-navigator" type="text/x-jquery-tmpl">
+<div id="navigator">
+  <div class="active">
+    <div id="navi-content">
+      <div id="navi-canvas-wrapper">
+        <canvas id="navi-canvas"></canvas>
+        <div id="navi-canvas-overlay"></div>
+      </div>
+      <div id="navi-controls">
+        <span id="navi-zoom-level"></span>
+        <div class="button-zoom" id="button-navi-zoom-out"></div>
+        <div id="navi-slider"></div>
+        <div class="button-zoom" id="button-navi-zoom-in"></div>
+      </div>
+    </div>
+  </div>
+  <div class="inactive">
+  </div>
+</div>
+</script>
+
+
+<script id="template-inspector" type="text/x-jquery-tmpl">
+<div id="inspector">
+  <div id="inspector-content">
+    <table id="inspector-table">
+      <tr>
+        <td>Font size:</td>
+        <td><div
+            class="buttonset buttons-very-small buttons-less-padding">
+            <button id="inspector-button-font-size-decrease">A-</button>
+            <button id="inspector-button-font-size-increase">A+</button>
+          </div></td>
+      </tr>
+      <tr>
+        <td>Font style:</td>
+        <td><div
+            class="font-styles buttonset buttons-very-small buttons-less-padding">
+            <input type="checkbox" id="inspector-checkbox-font-bold" /> 
+            <label
+            for="inspector-checkbox-font-bold" id="inspector-label-font-bold">B</label>
+              
+            <input type="checkbox" id="inspector-checkbox-font-italic" /> 
+            <label
+            for="inspector-checkbox-font-italic" id="inspector-label-font-italic">I</label> 
+            
+            <input
+            type="checkbox" id="inspector-checkbox-font-underline" /> 
+            <label
+            for="inspector-checkbox-font-underline" id="inspector-label-font-underline">U</label> 
+            
+            <input
+            type="checkbox" id="inspector-checkbox-font-linethrough" />
+             <label
+            for="inspector-checkbox-font-linethrough" id="inspector-label-font-linethrough">S</label>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>Font color:</td>
+        <td><input type="hidden" id="inspector-font-color-picker"
+          class="colorpicker" /></td>
+      </tr>
+      <tr>
+        <td>Branch color:</td>
+        <td><input type="hidden" id="inspector-branch-color-picker"
+          class="colorpicker" />
+          <button id="inspector-button-branch-color-children" title="Apply branch color to all children" class="right buttons-small buttons-less-padding">Inherit</button>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+</script>
+
+<script id="template-export-map" type="text/x-jquery-tmpl">
+<div id="export-map-dialog" title="Export mind map">
+  <h2 class='image-description'>To download the map right-click the
+    image and select "Save Image As"</h2>
+  <div id="export-preview"></div>
+</div>
+</script>
+
+</head>
+<body>
+  <div id="print-area">
+    <p class="print-placeholder">Please use the print option from the
+      mind map menu</p>
+  </div>
+  <!-- DEBUG -->
+	<!--<div id="debug-warning">Running in DEBUG mode.</div>-->
+  <!-- /DEBUG -->
+  <div id="container">
+    <div id="topbar">
+      <div id="toolbar">
+        <div id="logo" class="logo-bg">
+          <span>JANSON-WIKI</span>
+        </div>
+
+        <div class="buttons">
+          <span class="buttons-left"> </span> <span class="buttons-right">
+          </span>
+        </div>
+
+      </div>
+    </div>
+    <div id="canvas-container">
+      <div id="drawing-area" class="no-select"></div>
+    </div>
+    <div id="bottombar">
+      <div id="about">
+        <a href="https://github.com/drichard/mindmaps" target="_blank">drichard-mindmaps</a> <span
+          style="padding: 0 4px;">|</span>
+      </div>
+      <div id="statusbar">
+        <div
+          class="buttons buttons-right buttons-small buttons-less-padding"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/static/js2/libs/jquery1.6.1.min.js"></script>
+
+  <!-- DEBUG -->
+  <!-- set debug flag for all scripts. Will be removed in production -->
+  <script type="text/javascript">
+    var mindmaps = mindmaps || {};
+    mindmaps.DEBUG = false;
+  </script>
+  <!-- /DEBUG -->
+
+  <!-- JS:LIB:BEGIN -->
+  <script src="/static/js2/libs/jquery-ui-1.8.11.custom.min.js"></script>
+  <script src="/static/js2/libs/dragscrollable.js"></script>
+  <script src="/static/js2/libs/jquery.hotkeys.js"></script>
+  <script src="/static/js2/libs/jquery.mousewheel.js"></script>
+  <script src="/static/js2/libs/jquery.minicolors.js"></script>
+  <script src="/static/js2/libs/jquery.tmpl.js"></script>
+  <script src="/static/js2/libs/swfobject.js"></script>
+  <script src="/static/js2/libs/downloadify.min.js"></script>
+  <script src="/static/js2/libs/events.js"></script>
+
+  <script src="/static/js2/FilePicker.js"></script>
+  <script src="/static/js2/mind2.js"></script>
+  <!-- JS:LIB:END -->
+  <script type="text/javascript">
+	{% autoescape off%}
+	{{ mind_script }}
+	{% endautoescape %}
+  </script>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push([ '_setAccount', 'UA-23624804-1' ]);
+  _gaq.push([ '_trackPageview' ]);
+  (function() {
+    var ga = document.createElement('script');
+    ga.type = 'text/javascript';
+    ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl'
+        : 'http://www')
+        + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+</body>
+</html>

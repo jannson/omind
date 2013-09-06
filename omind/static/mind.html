@@ -1,0 +1,420 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Mind</title>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8" />		
+		<style type="text/css">
+			.root {	
+				border:3px solid #346789; 
+			}
+			.leaf {
+				border-bottom:3px solid #346789; 
+			}
+			.window { 
+				width:120px;
+				height:20px; 
+				z-index:20; 
+				position:absolute; 
+				font-size:0.8em;
+				/*margin:1em;*/
+			}
+			#wiki{	
+				cursor:pointer;	
+			}
+			#comment{
+				cursor:pointer;	
+			}
+			#cmd{
+				background: none repeat scroll 0 0 #FFFFFF;
+				border: 1px solid #CCCCCC;
+				position:absolute; 
+				display:none;
+				width:600;
+				height:400;
+			}
+			#box{
+				background: none repeat scroll 0 0 #FFFFFF;
+				border: 1px solid #CCCCCC;
+				position:absolute; 
+				display:none;
+				width:600;
+				height:400;
+				cursor:pointer;	
+			}
+		.menu {
+			background-color: #FFFFFF;
+			border-radius: 0.5em 0.5em 0.5em 0.5em;
+			box-shadow: 2px 2px 19px #AAAAAA;
+			opacity: 0.8;
+			padding: 0.3em;
+			position: fixed;
+			right: 1em;
+			top: 1em;
+			z-index: 5000;
+		}
+		.component{
+			position:absolute;	
+			cursor:pointer;
+		}
+		.tag{
+			border:3px solid #CCCCCC;
+			width:300;
+			height:200;
+			position:fixed;
+		}
+		</style>
+	</head>
+	<body data-demo-id="demo" data-library="jquery">
+	
+		<div style="position:absolute">
+		
+		<div class="component">
+				<div class="menu">
+					<a class="mplink" href="#">Menu1</a>&nbsp;|&nbsp;
+					<a class="mplink" href="#">Menu2</a>&nbsp;|&nbsp;
+					<a class="mplink" href="#">Menu3</a>&nbsp;|&nbsp;
+					<a class="mplink" href="mailto:gandancing@gmail.com">contact me</a>&nbsp;|&nbsp;
+					<a class="mplink" href="#">Menu4</a>&nbsp;|&nbsp;
+					<a class="mplink" href="#">Menu4</a>&nbsp;|&nbsp;
+					<a class="mplink" href="#">Menu4</a>&nbsp;|&nbsp;
+					<a class="mplink" href="#">Menu4</a>&nbsp;|&nbsp;
+					<a class="mplink" href="#">Menu4</a>
+			</div>
+		</div>
+
+		<div id="theTag" class="component">
+			<div class="tag">
+				<div><h3>Tag</h3></div>
+				<div><p>Linux&nbsp;|&nbsp;eCos&nbsp;|&nbsp;VxWorks&nbsp;|&nbsp;Linux</p></div>
+				<div><p>人性的弱点&nbsp;|&nbsp;Linux&nbsp;|&nbsp;Linux&nbsp;|&nbsp;Linux</p></div>
+			</div>	
+		</div>
+
+			<div id="demo">
+				<div id="window1" class="window root">新的思维导图</div>
+				<div  id="window2" class="window leaf">level2 <div id="wiki">WIKI(10)</div> <div id="comment">评论(30)</div></div>
+				<div  id="window3" class="window leaf">level3</div>
+				<div  id="window4" class="window leaf">level4</div>
+				<div  id="window5" class="window leaf">level5</div>
+				<div  id="window6" class="window leaf">level6</div>
+				<div  id="window7" class="window leaf">level7</div>
+				<div  id="window8" class="window leaf">level8</div>
+				<div  id="window9" class="window leaf">level9</div>
+				<div  id="window10" class="window leaf">level10</div>
+				
+				<div  id="left2" class="window leaf">level2</div>
+				<div  id="left3" class="window leaf">level3</div>
+				<div  id="left4" class="window leaf">level4</div>
+				<div  id="left5" class="window leaf">level5</div>
+				<div  id="left6" class="window leaf">level6</div>
+				<div  id="left7" class="window leaf">level7</div>
+				<div  id="left8" class="window leaf">level8</div>
+				<div  id="left9" class="window leaf">level9</div>
+				<div  id="left10" class="window leaf">level10</div>
+
+				<div id="box">
+					<h3>文章一</h3>
+					<p>需要一小点简介不？(评论30)</p>
+				<h3>文章二</h3>
+				<h3>文章三</h3>
+				<h3>文章四</h3>
+				<h3>文章五</h3>
+				<h3>文章一</h3>
+				<h3>文章一</h3>
+				<h3>文章一</h3>
+				<h3>文章一</h3>
+				<p>这是几篇相关的神奇文章。这是几篇相关的神奇文章。这是几篇相关的神奇文章。这是几篇相关的神奇文章。这是几篇相关的神奇文章。这是几篇相关的神奇文章。这是几篇相关的神奇文章。这是几篇相关的神奇文章。</p>
+			</div>
+			
+			<div id="cmd">
+				<div>您的评论是？</div>
+				<div><input type='text'/></div>
+				<div>more</div>
+				<div>about</div>
+			</div>
+
+		  </div>
+		</div>
+
+	  <!-- DEP -->
+	  <script type="text/javascript" src="js/lib/jquery-1.8.1-min.js"></script>
+		<script type="text/javascript" src="js/lib/jquery-ui-1.8.23-min.js"></script>
+    <script type="text/javascript" src="js/lib/jquery.ui.touch-punch.min.js"></script>
+		<!-- /DEP -->
+				
+		<!-- JS -->
+		<!-- support lib for bezier stuff -->
+		<script type="text/javascript" src="js/lib/jsBezier-0.4-min.js"></script>        
+		<!-- jsplumb util -->
+		<script type="text/javascript" src="js/1.3.15/jsPlumb-util-1.3.15-RC1.js"></script>
+        <!-- base DOM adapter -->
+		<script type="text/javascript" src="js/1.3.15/jsPlumb-dom-adapter-1.3.15-RC1.js"></script>
+        <!-- jsplumb drag-->
+		<script type="text/javascript" src="js/1.3.15/jsPlumb-drag-1.3.15-RC1.js"></script>
+		<!-- main jsplumb engine -->
+		<script type="text/javascript" src="js/1.3.15/jsPlumb-1.3.15-RC1.js"></script>
+		<!-- connectors, endpoint and overlays  -->
+		<script type="text/javascript" src="js/1.3.15/jsPlumb-defaults-1.3.15-RC1.js"></script>
+		<!-- state machine connectors -->
+		<script type="text/javascript" src="js/1.3.15/jsPlumb-connectors-statemachine-1.3.15-RC1.js"></script>
+		<!-- SVG renderer -->
+		<script type="text/javascript" src="js/1.3.15/jsPlumb-renderers-svg-1.3.15-RC1.js"></script>
+		<!-- canvas renderer -->
+		<script type="text/javascript" src="js/1.3.15/jsPlumb-renderers-canvas-1.3.15-RC1.js"></script>
+		<!-- vml renderer -->
+		<script type="text/javascript" src="js/1.3.15/jsPlumb-renderers-vml-1.3.15-RC1.js"></script>
+        <!-- jquery jsPlumb adapter -->
+				<script type="text/javascript" src="js/1.3.15/jquery.jsPlumb-1.3.15-RC1.js"></script>
+		<script src="js/lib/jquery.blockUI.js" type="text/javascript"></script>
+		<!-- JS -->
+		<script type="text/javascript">
+			;(function() {
+
+				window.jsDemo = {
+						
+					init : function() {
+						
+						jsPlumb.importDefaults({
+							DragOptions : { cursor: "pointer", zIndex:2000 },
+							HoverClass:"connector-hover"
+						});
+				
+						var connectorStrokeColor = "rgba(50, 50, 200, 1)",
+							connectorHighlightStrokeColor = "rgba(180, 180, 200, 1)",
+							hoverPaintStyle = { strokeStyle:"#7ec3d9" };			// hover paint style is merged on normal style, so you 
+							
+						var rightAnchors = [ [ 0.98, 1, 0, 0.1 ],  [ 0, 0.98, -0.2, 0 ]]; 
+						var leftAnchors = [ [ 0.02, 1, 0, 0.1 ],  [ 1, 0.98, 0.2, 0 ]]; 
+						
+					var mindRight={id:"window1",
+					child:[
+					{id:"window2",child:[
+					{id:"window4",child:[
+					{id:"window10",child:[]}
+					]}
+					]},
+					{id:"window3",child:[
+					{id:"window5",child:[]},
+					{id:"window6",child:[]},
+					{id:"window7",child:[]},
+					{id:"window8",child:[]},
+					{id:"window9",child:[]}
+					]}
+					]};
+					
+					var mindLeft={id:"window1",
+					child:[
+					{id:"left3",child:[
+					{id:"left5",child:[]},
+					{id:"left6",child:[]},
+					{id:"left7",child:[]},
+					{id:"left8",child:[]},
+					{id:"left9",child:[]}
+					]},
+					{id:"left2",child:[
+					{id:"left4",child:[
+					{id:"left10",child:[]}
+					]}
+					]}
+					]};
+
+					{
+						var DEF_HEIGHT=30, DEF_WIDTH=120,HGAP=10,VGAP=20;
+						var root;
+						var stack = [];
+						var proc = function(r) {
+						stack.push(r);
+						while(stack.length > 0)
+						{
+							root = stack[stack.length-1];
+							if((root.child.length > 0) && (root.child[0].visit == undefined))
+							{
+								//processing
+								$.each(root.child, function(key,val){stack.push(val);});
+							}
+							else
+							{
+								root.visit = true;
+								stack.pop();
+								root.height = 0;
+								root.width = DEF_WIDTH;
+								var maxWidth = 0;
+								$.each(root.child, function(key,val){
+										root.height += val.height + HGAP;
+										if(maxWidth < val.width)
+										{
+											maxWidth = val.width;
+										}
+										});
+
+								if(root.height < DEF_HEIGHT)
+								{
+									root.height = DEF_HEIGHT;
+								}
+								root.width += maxWidth + VGAP;
+							}
+						}
+						};
+						proc(mindRight);
+						proc(mindLeft);
+
+						root = mindRight;
+						root.height = (mindRight.height>mindLeft.height?mindRight.height:mindLeft.height);
+						root.x = DEF_WIDTH+mindLeft.width;
+						root.y = (root.height-DEF_HEIGHT)/2+200;
+						mindLeft.x = root.x;
+						mindLeft.y = root.y;
+						mindLeft.height = root.height;
+						$('#'+root.id).css("left",root.x);
+						$('#'+root.id).css("top",root.y);
+						stack.push(root);
+						while(stack.length > 0)
+						{
+							root = stack.pop();
+							var y2 = (root.height-DEF_HEIGHT)/2;
+							$.each(root.child, function(key,val){
+									val.x = root.x + DEF_WIDTH + VGAP;
+									val.y = root.y - y2 + (val.height - DEF_HEIGHT)/2;
+									y2 -= val.height + HGAP;
+									$('#'+val.id).css("left",val.x);
+									$('#'+val.id).css("top",val.y);
+									stack.push(val);
+									if(root == mindRight)
+									{
+										anEndpoint = {
+											endpoint:"Blank",
+											isSource:true, 
+											isTarget:true, 
+											maxConnections:-1, 
+											connector:"Bezier"
+										};
+										jsPlumb.connect({
+												source:jsPlumb.addEndpoint(root.id, anEndpoint, {anchor:[ "Perimeter", { shape:"ellipse" } ]}),
+												target:jsPlumb.addEndpoint(val.id, anEndpoint, {anchor:rightAnchors}),
+												cssClass:"c1",
+												endpointClass:"c1Endpoint",													   
+												paintStyle:{ 
+													lineWidth:1,
+													strokeStyle:"#346789",
+													outlineWidth:1,
+													outlineColor:"#666"
+												}
+												});
+									} 
+									else
+									{
+										jsPlumb.connect({
+											source:root.id, 
+												target:val.id, 			   	
+												connector:"Bezier",
+												cssClass:"c1",
+												endpoint:"Blank",
+												endpointClass:"c1Endpoint",													   
+												anchors:rightAnchors, 
+												paintStyle:{ 
+												lineWidth:1,
+												strokeStyle:"#346789",
+												outlineWidth:1,
+												outlineColor:"#666"
+										}
+										});
+									}
+									});
+						}
+
+						root = mindLeft;
+						stack.push(root);
+						while(stack.length > 0)	{
+							root = stack.pop();
+							var y2 = (root.height-DEF_HEIGHT)/2;
+							$.each(root.child, function(key,val){
+									val.x = root.x - DEF_WIDTH - VGAP;
+									val.y = root.y - y2 + (val.height - DEF_HEIGHT)/2;
+									y2 -= val.height + HGAP;
+									$('#'+val.id).css("left",val.x);
+									$('#'+val.id).css("top",val.y);
+									stack.push(val);
+									if(root == mindLeft){
+									var	anEndpoint = {
+											endpoint:"Blank",
+											isSource:true, 
+											isTarget:true, 
+											maxConnections:-1, 
+											connector:"Bezier"
+										};
+										jsPlumb.connect({
+												source:jsPlumb.addEndpoint(root.id, anEndpoint, {anchor:[ "Perimeter", { shape:"ellipse" } ]}),
+												target:jsPlumb.addEndpoint(val.id, anEndpoint, {anchor:leftAnchors}),
+												cssClass:"c1",
+												endpointClass:"c1Endpoint",													   
+												paintStyle:{ 
+													lineWidth:1,
+													strokeStyle:"#346789",
+													outlineWidth:1,
+													outlineColor:"#666"
+												}
+												});
+									} 
+									else	{
+										jsPlumb.connect({
+											source:root.id, 
+												target:val.id, 			   	
+												connector:"Bezier",
+												cssClass:"c1",
+												endpoint:"Blank",
+												endpointClass:"c1Endpoint",													   
+												anchors:leftAnchors, 
+												paintStyle:{ 
+												lineWidth:1,
+												strokeStyle:"#346789",
+												outlineWidth:1,
+												outlineColor:"#666"
+										}
+										});
+									}
+									});
+						}
+					}
+						// make all .window divs draggable
+					jsPlumb.draggable(jsPlumb.getSelector(".component"));
+					$("#theTag").css("left",$(document).width()-300);
+					$("#theTag").css("top", 450);
+
+					}
+				};	
+			})();
+
+			jsPlumb.bind("ready", function() {
+
+				// chrome fix.
+				document.onselectstart = function () { return false; };				
+				
+				$('#wiki').click(function(){
+						$.blockUI({ 
+								message: $('#box'), 
+								css: { 
+								top:		'50%',
+								left:		'50%',
+								textAlign:	'left',
+								marginLeft:     '-320px', 
+								marginTop:      '-145px', 
+										width: '600px',
+										background:'none'
+								} 
+						}); 
+				$('.blockOverlay').attr('title','单击关闭').click($.unblockUI); 
+				});
+				
+				$('#comment').click(function(){ 
+							$.blockUI({ message: $('#cmd') }); 
+					$('.blockOverlay').attr('title','单击关闭').click($.unblockUI); 
+					$('.close').click($.unblockUI);
+				 }); 
+
+				jsPlumb.setRenderMode(jsPlumb.SVG);
+				jsDemo.init();
+						 
+			});
+		</script>
+	</body>
+</html>

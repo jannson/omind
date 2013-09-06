@@ -1,4 +1,4 @@
 omind
 =====
 
-A online freemind.
+A online freemind. Just do it...
